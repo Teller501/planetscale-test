@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/main.css}" rel="stylesheet"></head>
+<body>
+<h1>Superhero Database</h1>
+<!-- Make a table that displays all superheroes -->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Hero Name</th>
+        <th scope="col">Real Name</th>
+        <th scope="col">Creation Date</th>
+        <th scope="col">Powers</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="superhero : ${heroes}">
+        <td th:text="${superhero.id}"/>
+        <td th:text="${superhero.heroName}"/>
+        <td th:text="${superhero.realName}"/>
+        <td th:text="${superhero.creationDate}"/>
+        <td>
+            <a th:href="@{/superhero/superpower/{heroName}(heroName=${superhero.heroName})}">View Powers</a>
+        </td>
+        <td><a th:href="@{'/superhero/update/' + ${superhero.id}}">Update</a></td>
+        <td><a th:href="@{'/superhero/delete/' + ${superhero.id}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<button onclick="window.location.href='/superhero/add';">Add Superhero</button>
+
+
+</body>
+</html>
